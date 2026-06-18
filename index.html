@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResuMetric | Premium SaaS Resume Builder</title>
+  <meta name="description"
+    content="Design ATS-optimized resumes that stand out. Real-time preview, instant PDF downloads, and active keyword scores.">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+
+<body>
+
+  <!-- Ambient background glow mesh circles -->
+  <div class="aurora-blur aurora-primary" style="top: 10%; left: -10%;"></div>
+  <div class="aurora-blur aurora-secondary" style="top: 25%; right: -15%;"></div>
+  <div class="aurora-blur aurora-accent" style="bottom: 10%; left: 20%;"></div>
+
+  <!-- Header -->
+  <header class="landing-header">
+    <div class="logo-container">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round" style="width: 100%; height: 100%; color: #2563EB;">
+          <path d="M12 2L2 22h20L12 2z" fill="rgba(37, 99, 235, 0.08)" stroke="#2563EB" />
+          <path d="M12 6l-6 10h12l-6-10z" fill="#2563EB" stroke="#2563EB" />
+          <circle cx="12" cy="13" r="2" fill="#FFFFFF" />
+          <path d="M12 15v4" stroke="#2563EB" />
+        </svg>
+      </div>
+      <div class="logo-text">Resu<span>Metric</span></div>
+    </div>
+    <a href="builder.html" class="btn-build-now">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9" />
+        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+      </svg>
+      Build Now
+    </a>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="premium-badge">ATS Optimized Resume Builder</div>
+      <h1 class="hero-title">
+        <span>Build Resumes That</span>
+        <em>Get Interviews.</em>
+      </h1>
+      <p class="hero-subtitle">
+        Create visually stunning, high-performance resumes with real-time scoring, developer-focused templates, and
+        instant download. Rebuilt from the ground up for modern engineering standards.
+      </p>
+
+      <div class="hero-actions">
+        <a href="builder.html?tab=editor" class="btn-saas-primary">Create Resume</a>
+        <a href="#templates" class="btn-saas-secondary">Explore Templates</a>
+      </div>
+    </div>
+
+    <!-- Right Side: 3D Resume Mockup and Floating Cards -->
+    <div class="hero-mockup-wrapper">
+      <div class="mockup-base-resume">
+        <!-- Mockup skeleton -->
+        <div class="mockup-lines-group">
+          <div class="skeleton" style="height: 18px; width: 70%; border-radius: var(--radius-sm); margin-bottom: 8px;">
+          </div>
+          <div class="skeleton" style="height: 8px; width: 40%; border-radius: var(--radius-sm); margin-bottom: 16px;">
+          </div>
+          <div class="skeleton" style="height: 6px; width: 100%; border-radius: var(--radius-sm);"></div>
+          <div class="skeleton" style="height: 6px; width: 90%; border-radius: var(--radius-sm);"></div>
+          <div class="skeleton" style="height: 6px; width: 95%; border-radius: var(--radius-sm); margin-bottom: 12px;">
+          </div>
+
+          <div class="skeleton" style="height: 10px; width: 35%; border-radius: var(--radius-sm); margin-bottom: 8px;">
+          </div>
+          <div class="skeleton" style="height: 6px; width: 100%; border-radius: var(--radius-sm);"></div>
+          <div class="skeleton" style="height: 6px; width: 85%; border-radius: var(--radius-sm);"></div>
+        </div>
+      </div>
+
+      <!-- Floating ATS Score Card -->
+      <div class="floating-widget widget-ats-score">
+        <div
+          style="background-color: var(--success-glow); color: var(--success); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;">
+          92
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">ATS Score
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--text-primary);">Optimal Strength</div>
+        </div>
+      </div>
+
+      <!-- Floating PDF Export Card -->
+      <div class="floating-widget widget-pdf-export">
+        <div
+          style="background-color: var(--primary-glow); color: var(--primary); border-radius: var(--radius-sm); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">PDF
+            Export</div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--text-primary);">Exported (A4)</div>
+        </div>
+      </div>
+
+      <!-- Floating Skills Tags Card -->
+      <div class="floating-widget widget-skills">
+        <span class="badge-saas ats" style="padding: 4px 8px; border-radius: var(--radius-sm);">React</span>
+        <span class="badge-saas popular" style="padding: 4px 8px; border-radius: var(--radius-sm);">Node.js</span>
+        <span class="badge-saas recommended" style="padding: 4px 8px; border-radius: var(--radius-sm);">Docker</span>
+      </div>
+
+      <!-- Floating Resume Completion Card -->
+      <div class="floating-widget widget-completion">
+        <div style="font-size: 12px; font-weight: 700; color: var(--text-primary);">85% Completed</div>
+        <div
+          style="width: 80px; height: 6px; background-color: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
+          <div style="width: 85%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent));">
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Profile Summary Card -->
+      <div class="floating-widget widget-profile">
+        <div style="display: flex; flex-direction: column; gap: 6px; width: 100%;">
+          <div
+            style="font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px;">
+            Executive Summary</div>
+          <p style="font-size: 10px; color: var(--text-muted); line-height: 1.5; margin: 0;">"Ambitious Full Stack MCA
+            Graduate specializing in cloud architectures and real-time backend microservices..."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section class="stats-section">
+    <div class="stats-card">
+      <div class="stats-number">10,000+</div>
+      <div class="stats-label">Resumes Generated</div>
+    </div>
+    <div class="stats-card">
+      <div class="stats-number">95%</div>
+      <div class="stats-label">ATS Optimized</div>
+    </div>
+    <div class="stats-card">
+      <div class="stats-number">4</div>
+      <div class="stats-label">Professional Templates</div>
+    </div>
+    <div class="stats-card">
+      <div class="stats-number">100%</div>
+      <div class="stats-label">Auto Save Support</div>
+    </div>
+  </section>
+
+  <!-- Template Showcase Section -->
+  <section class="templates-section" id="templates">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto 56px;">
+      <h2
+        style="font-size: 32px; font-weight: 800; letter-spacing: -0.75px; color: var(--text-primary); margin-bottom: 12px;">
+        Choose Your Blueprint</h2>
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">Re-engineered blueprints tailored
+        specifically to clear ATS bots and wow engineering directors.</p>
+    </div>
+
+    <div class="templates-grid">
+      <!-- Professional Card -->
+      <div class="premium-template-card">
+        <div class="template-card-preview">
+          <img src="assets/template_prof.png" alt="Professional Template preview"
+            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
+        </div>
+        <div class="template-card-info">
+          <div class="template-card-header">
+            <h3 class="template-card-name">Professional</h3>
+            <div class="template-card-badges">
+              <span class="badge-saas recommended">RECOMMENDED</span>
+              <span class="badge-saas ats">ATS 98%</span>
+            </div>
+          </div>
+
+          <p class="template-card-desc">Ideal for corporate positions and corporate roles. Recommended for developers
+            with 3+ years experience.</p>
+          <a href="builder.html?template=professional" class="btn-template-use">Use Template</a>
+        </div>
+      </div>
+
+      <!-- Modern Card -->
+      <div class="premium-template-card">
+        <div class="template-card-preview">
+          <img src="assets/template_mod.png" alt="Modern Template preview"
+            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
+        </div>
+        <div class="template-card-info">
+          <div class="template-card-header">
+            <h3 class="template-card-name">Modern</h3>
+            <div class="template-card-badges">
+              <span class="badge-saas popular">POPULAR</span>
+              <span class="badge-saas ats">ATS 94%</span>
+            </div>
+          </div>
+
+          <p class="template-card-desc">High contrast dual-column dark styling. Best for fast-growing startups and
+            product engineers.</p>
+          <a href="builder.html?template=modern" class="btn-template-use">Use Template</a>
+        </div>
+      </div>
+
+      <!-- Student Card -->
+      <div class="premium-template-card">
+        <div class="template-card-preview">
+          <img src="assets/template_stud.png" alt="Student Template preview"
+            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
+        </div>
+        <div class="template-card-info">
+          <div class="template-card-header">
+            <h3 class="template-card-name">Student</h3>
+            <div class="template-card-badges">
+              <span class="badge-saas recommended"
+                style="background-color: var(--accent-glow); color: var(--accent); border-color: rgba(6,182,212,0.2);">EDU
+                FOCUS</span>
+              <span class="badge-saas ats">ATS 96%</span>
+            </div>
+          </div>
+
+          <p class="template-card-desc">Academic details and projects placed first. Perfect for new college graduates
+            and freshers.</p>
+          <a href="builder.html?template=student" class="btn-template-use">Use Template</a>
+        </div>
+      </div>
+
+      <!-- Minimal Card -->
+      <div class="premium-template-card">
+        <div class="template-card-preview">
+          <img src="assets/template_min.png" alt="Minimal Template preview"
+            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
+        </div>
+        <div class="template-card-info">
+          <div class="template-card-header">
+            <h3 class="template-card-name">Minimal</h3>
+            <div class="template-card-badges">
+              <span class="badge-saas ats">ATS 99%</span>
+            </div>
+          </div>
+
+          <p class="template-card-desc">Clean spacing, classic serif formatting. Ideal for designers, writers, and
+            executive leaders.</p>
+          <a href="builder.html?template=minimal" class="btn-template-use">Use Template</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto 32px;">
+      <h2
+        style="font-size: 32px; font-weight: 800; letter-spacing: -0.75px; color: var(--text-primary); margin-bottom: 12px;">
+        Feature Showcases</h2>
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">Re-engineered with premium tools to help
+        you build faster and bypass manual checks.</p>
+    </div>
+
+    <!-- Feature 1 -->
+    <div class="feature-layout">
+      <div class="feature-info">
+        <div class="feature-label">01 / LIVE PREVIEW</div>
+        <h3 class="feature-title">Real-Time Fluid Sync</h3>
+        <div class="features-grid">
+          <!-- Feature 1: Live Preview -->
+          <div class="premium-feature-card">
+            <div class="feature-card-visual">
+              <!-- Live Preview inline mockup -->
+              <div
+                style="display: flex; gap: 8px; width: 85%; height: 80%; align-items: center; justify-content: center;">
+                <div
+                  style="flex: 1; height: 90%; background: rgba(2,6,23,0.6); border: 1px dashed var(--glass-border); border-radius: var(--radius-sm); padding: 8px; display: flex; flex-direction: column; gap: 6px;">
+                  <div class="skeleton" style="height: 6px; width: 60%;"></div>
+                  <div class="skeleton" style="height: 4px; width: 80%;"></div>
+                  <div class="skeleton" style="height: 4px; width: 40%;"></div>
+                </div>
+                <div
+                  style="color: var(--primary); font-size: 16px; font-weight: bold; transform: rotate(90deg); animation: float 3s ease infinite;">
+                  ⇄</div>
+                <div
+                  style="flex: 1; height: 95%; background: #FFFFFF; border-radius: var(--radius-sm); padding: 8px; display: flex; flex-direction: column; gap: 4px; box-shadow: var(--shadow-sm);">
+                  <div class="skeleton" style="height: 6px; width: 70%; background-color: #E2E8F0;"></div>
+                  <div style="height: 1.5px; background: var(--primary); width: 100%;"></div>
+                  <div class="skeleton" style="height: 3px; width: 100%; background-color: #E2E8F0;"></div>
+                  <div class="skeleton" style="height: 3px; width: 90%; background-color: #E2E8F0;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="feature-card-info">
+              <div class="feature-card-label">01 / Live Preview</div>
+              <h3 class="feature-card-title">Real-Time Fluid Sync</h3>
+              <p class="feature-card-desc">Watch your resume update dynamically as you type. Split-screen layout updates
+                with zero latency.</p>
+            </div>
+          </div>
+
+          <!-- Feature 2: ATS Score -->
+          <div class="premium-feature-card">
+            <div class="feature-card-visual">
+              <!-- ATS Score visual -->
+              <div style="display: flex; align-items: center; justify-content: center; gap: 14px; width: 85%;">
+                <div
+                  style="border: 4px solid rgba(255,255,255,0.04); border-top-color: var(--success); border-radius: 50%; width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; color: #FFFFFF; box-shadow: var(--shadow-glow); flex-shrink: 0;">
+                  92%
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 6px; flex-grow: 1;">
+                  <div class="skeleton" style="height: 8px; width: 70%;"></div>
+                  <div class="skeleton" style="height: 5px; width: 100%;"></div>
+                  <div
+                    style="font-size: 9px; color: var(--success); font-weight: bold; display: flex; align-items: center; gap: 4px;">
+                    ✔ ATS Compliant
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="feature-card-info">
+              <div class="feature-card-label">02 / ATS Analyzer</div>
+              <h3 class="feature-card-title">Active ATS Optimizer</h3>
+              <p class="feature-card-desc">Analyze formatting and keyword density live. Get instant suggestions to clear
+                parsing screeners.</p>
+            </div>
+          </div>
+
+          <!-- Feature 3: One Click PDF -->
+          <div class="premium-feature-card">
+            <div class="feature-card-visual">
+              <!-- PDF download visual -->
+              <div
+                style="background-color: var(--glass-bg); border: 1px solid var(--glass-border); padding: 12px 18px; border-radius: var(--radius-md); display: flex; align-items: center; gap: 10px; box-shadow: var(--glass-shadow); width: 80%;">
+                <div
+                  style="background-color: var(--primary); color: #FFFFFF; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                </div>
+                <div style="overflow: hidden;">
+                  <div
+                    style="font-weight: 700; font-size: 11px; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    resume_rohan.pdf</div>
+                  <div style="font-size: 9px; color: var(--success); font-weight: bold;">Export Success</div>
+                </div>
+              </div>
+            </div>
+            <div class="feature-card-info">
+              <div class="feature-card-label">03 / PDF Export</div>
+              <h3 class="feature-card-title">One-Click PDF Export</h3>
+              <p class="feature-card-desc">Download highly precise, clean A4 PDF layouts fully compatible with major
+                applicant systems.</p>
+            </div>
+          </div>
+
+          <!-- Feature 4: Auto Save -->
+          <div class="premium-feature-card">
+            <div class="feature-card-visual">
+              <!-- Auto Save visual -->
+              <div
+                style="display: flex; gap: 8px; align-items: center; background-color: var(--glass-bg); border: 1px solid var(--glass-border); padding: 10px 16px; border-radius: var(--radius-full); box-shadow: var(--glass-shadow);">
+                <div
+                  style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--success); box-shadow: 0 0 8px var(--success); animation: pulse-glow 2s infinite;">
+                </div>
+                <span style="font-size: 11px; font-weight: 700; color: var(--text-primary);">Autosaved in
+                  background</span>
+              </div>
+            </div>
+            <div class="feature-card-info">
+              <div class="feature-card-label">04 / Auto Save</div>
+              <h3 class="feature-card-title">Zero-Loss Persistence</h3>
+              <p class="feature-card-desc">Every change triggers an auto-save in local storage. Reload or crash safe,
+                pick up where you left off.</p>
+            </div>
+          </div>
+
+          <!-- Feature 5: Template Customization -->
+          <div class="premium-feature-card">
+            <div class="feature-card-visual">
+              <!-- Customization visual -->
+              <div
+                style="width: 75%; display: flex; flex-direction: column; gap: 8px; background: rgba(15,23,42,0.4); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <div style="display: flex; gap: 6px;">
+                  <span
+                    style="width: 20px; height: 20px; border-radius: 50%; background-color: var(--primary); box-shadow: var(--shadow-glow);"></span>
+                  <span
+                    style="width: 20px; height: 20px; border-radius: 50%; background-color: var(--secondary);"></span>
+                  <span style="width: 20px; height: 20px; border-radius: 50%; background-color: var(--accent);"></span>
+                </div>
+                <div
+                  style="height: 4px; background-color: var(--border-color); border-radius: 2px; position: relative; margin-top: 6px;">
+                  <span
+                    style="position: absolute; left: 35%; top: -3px; width: 10px; height: 10px; border-radius: 50%; background-color: var(--primary);"></span>
+                </div>
+              </div>
+            </div>
+            <div class="feature-card-info">
+              <div class="feature-card-label">05 / Customization</div>
+              <h3 class="feature-card-title">Bespoke Brand Styling</h3>
+              <p class="feature-card-desc">Adjust accent colors, page density sizes, margin heights, and layout rules
+                with sleek sliders.</p>
+            </div>
+          </div>
+
+          <!-- Feature 6: Mobile Responsive -->
+          <div class="premium-feature-card">
+            <div class="feature-card-visual">
+              <!-- Responsive mobile visual -->
+              <div
+                style="width: 100px; height: 160px; background: var(--bg-app); border: 2.5px solid var(--border-color); border-radius: 12px; padding: 8px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 6px;">
+                <div
+                  style="width: 20px; height: 3px; background: var(--border-color); border-radius: 2.5px; align-self: center;">
+                </div>
+                <div class="skeleton" style="height: 8px; width: 70%; margin-top: 4px;"></div>
+                <div class="skeleton" style="height: 25px; width: 100%;"></div>
+                <div style="margin-top: auto; display: flex; justify-content: space-around; width: 100%;">
+                  <span style="width: 12px; height: 12px; background: var(--primary-glow); border-radius: 3px;"></span>
+                  <span style="width: 12px; height: 12px; background: var(--border-color); border-radius: 3px;"></span>
+                  <span style="width: 12px; height: 12px; background: var(--border-color); border-radius: 3px;"></span>
+                </div>
+              </div>
+            </div>
+            <div class="feature-card-info">
+              <div class="feature-card-label">06 / Responsiveness</div>
+              <h3 class="feature-card-title">Native Mobile Layouts</h3>
+              <p class="feature-card-desc">Bottom tab panels adapt fluidly on mobile screens, keeping editor actions
+                close at hand.</p>
+            </div>
+          </div>
+        </div>
+  </section>
+
+  <!-- CTA Banner Section -->
+  <section class="saas-cta-section">
+    <div class="saas-cta-banner">
+      <h2 class="saas-cta-title">Ready to land your dream job?</h2>
+      <p class="saas-cta-desc">Join thousands of students who have secured internships and full-time engineering roles
+        using ResuMetric.</p>
+      <a href="builder.html?tab=editor" class="btn-saas-primary" style="padding: 16px 48px;">Start Building for Free</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <div class="footer-top-grid">
+      <div class="footer-brand">
+        <div class="logo-container">
+          <div class="logo-icon" style="width:24px; height:24px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" style="width: 100%; height: 100%; color: #2563EB;">
+              <path d="M12 2L2 22h20L12 2z" fill="rgba(37, 99, 235, 0.08)" stroke="#2563EB" />
+              <path d="M12 6l-6 10h12l-6-10z" fill="#2563EB" stroke="#2563EB" />
+              <circle cx="12" cy="13" r="2" fill="#FFFFFF" />
+              <path d="M12 15v4" stroke="#2563EB" />
+            </svg>
+          </div>
+          <div class="logo-text" style="font-size:18px;">Resu<span>Metric</span></div>
+        </div>
+        <p class="footer-brand-text">Premium builder optimized for applicant parsing systems and engineering candidates.
+        </p>
+      </div>
+
+      <div class="footer-saas-links-container" style="display: flex; gap: 80px;">
+        <div class="footer-links-col">
+          <div class="footer-col-title">Product</div>
+          <div class="footer-col-links">
+            <a href="builder.html?tab=editor">Editor Panel</a>
+            <a href="builder.html?tab=layout">Blueprints</a>
+            <a href="builder.html?tab=styles">Styling</a>
+          </div>
+        </div>
+        <div class="footer-links-col">
+          <div class="footer-col-title">Legal</div>
+          <div class="footer-col-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">API Docs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2024 ResuMetric AI. Engineered for Excellence.</div>
+      <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+        <a href="#">Support</a>
+        <a href="#">Security</a>
+        <div style="color: var(--text-muted); font-size: 11px; margin-left: 12px; text-align: left; line-height: 1.4;">
+          Designed and Developed by<br>
+          <span style="padding-left: 12px; color: var(--text-primary); font-weight: 700;">Prajwal Chougala</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/landing.js"></script>
+</body>
+
+</html>
