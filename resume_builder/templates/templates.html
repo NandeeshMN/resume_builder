@@ -10,6 +10,190 @@
     content="Select from our premium, ATS-optimized resume blueprints designed for engineering candidates.">
   <link rel="stylesheet" href="{% static 'css/variables.css' %}">
   <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+  <style>
+    /* Card buttons improvements */
+    .template-card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 12px;
+      margin-top: auto;
+    }
+    
+    .btn-template-preview {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      outline: none;
+    }
+    
+    .btn-template-preview:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--text-muted);
+    }
+    
+    .btn-template-use {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: #FFFFFF;
+      border: 1px solid var(--primary);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      outline: none;
+    }
+    
+    .btn-template-use:hover {
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+      box-shadow: var(--shadow-glow-blue);
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    /* Modal Container */
+    .modal-container {
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 900px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+    
+    .modal-close-btn:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.1);
+      transform: rotate(90deg);
+    }
+    
+    .modal-content-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      height: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    @media (min-width: 768px) {
+      .modal-content-grid {
+        grid-template-columns: 1.2fr 1fr;
+        max-height: 80vh;
+        overflow-y: visible;
+      }
+    }
+    
+    .modal-preview-side {
+      background: #0d121f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    @media (min-width: 768px) {
+      .modal-preview-side {
+        border-bottom: none;
+        border-right: 1px solid var(--border-color);
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+    }
+    
+    .modal-preview-side img {
+      max-width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    }
+    
+    .modal-details-side {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: flex-start;
+      overflow-y: auto;
+    }
+    
+    .modal-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+      margin: 0;
+    }
+    
+    .modal-description {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
 </head>
 
 <body>
@@ -62,7 +246,7 @@
 
     <div class="templates-grid">
       <!-- Professional Card -->
-      <div class="premium-template-card">
+      <div class="premium-template-card" data-full-desc="A clean, ATS-optimized layout with a clear hierarchical flow. Designed with corporate jobs, internships, and experienced developers in mind to structure skills, experience, and certifications cleanly.">
         <div class="template-card-preview">
           <img src="{% static 'assets/template_prof.png' %}" alt="Professional Template preview"
             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
@@ -71,19 +255,24 @@
           <div class="template-card-header">
             <h3 class="template-card-name">Professional</h3>
             <div class="template-card-badges">
-              <span class="badge-saas recommended">RECOMMENDED</span>
-              <span class="badge-saas ats">ATS 98%</span>
+              <span class="badge-saas recommended">⭐ RECOMMENDED</span>
+              <span class="badge-saas category-badge" style="background-color: rgba(37,99,235,0.15); color: #3b82f6; border-color: rgba(37,99,235,0.3); font-size: 9px; font-weight: 700; padding: 3px 6px; border-radius: 4px; display: inline-flex; align-items: center;">
+                <span style="display:inline-block; width:6px; height:6px; background:#3b82f6; border-radius:50%; margin-right:4px;"></span>Professional
+              </span>
             </div>
           </div>
 
-          <p class="template-card-desc">Ideal for corporate positions and corporate roles. Recommended for developers
-            with 3+ years experience.</p>
-          <a href="{% url 'builder_new' %}?template=professional" class="btn-template-use">Use Template</a>
+          <p class="template-card-desc">Clean ATS-friendly layout for jobs and internships.</p>
+          
+          <div class="template-card-actions">
+            <button class="btn-template-preview">Preview</button>
+            <a href="{% url 'builder_new' %}?template=professional" class="btn-template-use">Use Template</a>
+          </div>
         </div>
       </div>
 
       <!-- Modern Card -->
-      <div class="premium-template-card">
+      <div class="premium-template-card" data-full-desc="A high-contrast, dual-column slate blueprint. Featuring creative design elements with bold visual hierarchies, making it ideal for fast-growing startups, creative engineers, and product creators.">
         <div class="template-card-preview">
           <img src="{% static 'assets/template_mod.png' %}" alt="Modern Template preview"
             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
@@ -92,19 +281,24 @@
           <div class="template-card-header">
             <h3 class="template-card-name">Modern</h3>
             <div class="template-card-badges">
-              <span class="badge-saas popular">POPULAR</span>
-              <span class="badge-saas ats">ATS 94%</span>
+              <span class="badge-saas popular" style="background-color: rgba(124,58,237,0.15); color: #c084fc; border-color: rgba(124,58,237,0.3); font-size: 9px; font-weight: 700; padding: 3px 6px; border-radius: 4px; display: inline-flex; align-items: center;">⭐ POPULAR</span>
+              <span class="badge-saas category-badge" style="background-color: rgba(124,58,237,0.15); color: #a78bfa; border-color: rgba(124,58,237,0.3); font-size: 9px; font-weight: 700; padding: 3px 6px; border-radius: 4px; display: inline-flex; align-items: center;">
+                <span style="display:inline-block; width:6px; height:6px; background:#c084fc; border-radius:50%; margin-right:4px;"></span>Modern
+              </span>
             </div>
           </div>
 
-          <p class="template-card-desc">High contrast dual-column dark styling. Best for fast-growing startups and
-            product engineers.</p>
-          <a href="{% url 'builder_new' %}?template=modern" class="btn-template-use">Use Template</a>
+          <p class="template-card-desc">Creative layout with bold visual hierarchy.</p>
+          
+          <div class="template-card-actions">
+            <button class="btn-template-preview">Preview</button>
+            <a href="{% url 'builder_new' %}?template=modern" class="btn-template-use">Use Template</a>
+          </div>
         </div>
       </div>
 
       <!-- Student Card -->
-      <div class="premium-template-card">
+      <div class="premium-template-card" data-full-desc="An education-first template with academic highlights placed first. Perfect for new college graduates, entry-level candidates, freshers, and internships to emphasize projects and technical skills.">
         <div class="template-card-preview">
           <img src="{% static 'assets/template_stud.png' %}" alt="Student Template preview"
             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
@@ -113,21 +307,23 @@
           <div class="template-card-header">
             <h3 class="template-card-name">Student</h3>
             <div class="template-card-badges">
-              <span class="badge-saas recommended"
-                style="background-color: var(--accent-glow); color: var(--accent); border-color: rgba(6,182,212,0.2);">EDU
-                FOCUS</span>
-              <span class="badge-saas ats">ATS 96%</span>
+              <span class="badge-saas category-badge" style="background-color: rgba(16,185,129,0.15); color: #34d399; border-color: rgba(16,185,129,0.3); font-size: 9px; font-weight: 700; padding: 3px 6px; border-radius: 4px; display: inline-flex; align-items: center;">
+                <span style="display:inline-block; width:6px; height:6px; background:#34d399; border-radius:50%; margin-right:4px;"></span>Student
+              </span>
             </div>
           </div>
 
-          <p class="template-card-desc">Academic details and projects placed first. Perfect for new college graduates
-            and freshers.</p>
-          <a href="{% url 'builder_new' %}?template=student" class="btn-template-use">Use Template</a>
+          <p class="template-card-desc">Focused on education and academic projects.</p>
+          
+          <div class="template-card-actions">
+            <button class="btn-template-preview">Preview</button>
+            <a href="{% url 'builder_new' %}?template=student" class="btn-template-use">Use Template</a>
+          </div>
         </div>
       </div>
 
       <!-- Minimal Card -->
-      <div class="premium-template-card">
+      <div class="premium-template-card" data-full-desc="An elegant, distraction-free serif resume design. Combines classic typographical proportions with clean spacing, highly recommended for writers, managers, and designers.">
         <div class="template-card-preview">
           <img src="{% static 'assets/template_min.png' %}" alt="Minimal Template preview"
             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
@@ -136,13 +332,18 @@
           <div class="template-card-header">
             <h3 class="template-card-name">Minimal</h3>
             <div class="template-card-badges">
-              <span class="badge-saas ats">ATS 99%</span>
+              <span class="badge-saas category-badge" style="background-color: rgba(255,255,255,0.06); color: var(--text-primary); border-color: rgba(255,255,255,0.15); font-size: 9px; font-weight: 700; padding: 3px 6px; border-radius: 4px; display: inline-flex; align-items: center;">
+                <span style="display:inline-block; width:6px; height:6px; background:#cbd5e1; border-radius:50%; margin-right:4px;"></span>Minimal
+              </span>
             </div>
           </div>
 
-          <p class="template-card-desc">Clean spacing, classic serif formatting. Ideal for designers, writers, and
-            executive leaders.</p>
-          <a href="{% url 'builder_new' %}?template=minimal" class="btn-template-use">Use Template</a>
+          <p class="template-card-desc">Elegant and distraction-free resume design.</p>
+          
+          <div class="template-card-actions">
+            <button class="btn-template-preview">Preview</button>
+            <a href="{% url 'builder_new' %}?template=minimal" class="btn-template-use">Use Template</a>
+          </div>
         </div>
       </div>
     </div>
@@ -200,6 +401,93 @@
       </div>
     </div>
   </footer>
+
+  <!-- Preview Modal -->
+  <div id="preview-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="modal-close-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-content-grid">
+        <div class="modal-preview-side">
+          <img id="modal-preview-img" src="" alt="Template Preview" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
+        </div>
+        <div class="modal-details-side">
+          <div id="modal-badge-container" class="template-card-badges"></div>
+          <h2 id="modal-template-title" class="modal-title">Template Name</h2>
+          <p id="modal-template-desc" class="modal-description">Template description details...</p>
+          
+          <div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px;">
+            <div style="font-size: 11px; color: var(--text-muted); line-height: 1.5;">
+              This blueprint is fully ATS-compatible and designed to structure details cleanly. All existing form data will be preserved upon selection.
+            </div>
+            <a id="modal-use-btn" href="#" class="btn-template-use" style="text-align: center; justify-content: center; width: 100%;">
+              Use This Template
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('preview-modal');
+      const closeBtn = document.getElementById('modal-close-btn');
+      const modalImg = document.getElementById('modal-preview-img');
+      const modalTitle = document.getElementById('modal-template-title');
+      const modalDesc = document.getElementById('modal-template-desc');
+      const modalBadge = document.getElementById('modal-badge-container');
+      const modalUseBtn = document.getElementById('modal-use-btn');
+
+      // Bind Preview Buttons
+      document.querySelectorAll('.btn-template-preview').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const card = btn.closest('.premium-template-card');
+          const img = card.querySelector('.template-card-preview img').src;
+          const name = card.querySelector('.template-card-name').textContent;
+          const desc = card.getAttribute('data-full-desc') || card.querySelector('.template-card-desc').textContent;
+          const badgesHtml = card.querySelector('.template-card-badges').innerHTML;
+          const useUrl = card.querySelector('.btn-template-use').getAttribute('href');
+
+          modalImg.src = img;
+          modalTitle.textContent = name;
+          modalDesc.textContent = desc;
+          modalBadge.innerHTML = badgesHtml;
+          modalUseBtn.setAttribute('href', useUrl);
+
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden'; // Lock scrolling
+        });
+      });
+
+      // Close modal helpers
+      function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; // Re-enable scrolling
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+      }
+
+      // Close when clicking outside content box
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Close on Escape key press
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+          closeModal();
+        }
+      });
+    });
+  </script>
 
 </body>
 
