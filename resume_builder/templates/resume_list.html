@@ -1,0 +1,266 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResuMetric | Saved Resumes</title>
+  <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+  <style>
+    .dashboard-section {
+      padding: 140px 24px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 80vh;
+    }
+    .dashboard-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .dashboard-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.75px;
+      color: var(--text-primary);
+    }
+    .resumes-table-container {
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .resumes-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .resumes-table th {
+      padding: 16px 24px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(2, 6, 23, 0.3);
+    }
+    .resumes-table td {
+      padding: 20px 24px;
+      font-size: 14px;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .resumes-table tr:last-child td {
+      border-bottom: none;
+    }
+    .resumes-table tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .action-btn-group {
+      display: flex;
+      gap: 8px;
+    }
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: rgba(30, 41, 59, 0.5);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .action-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--text-muted);
+    }
+    .action-btn.btn-view:hover {
+      background: rgba(6, 182, 212, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .action-btn.btn-edit:hover {
+      background: rgba(37, 99, 235, 0.15);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .action-btn.btn-delete:hover {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: #ef4444;
+      color: #ef4444;
+    }
+    .template-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      text-transform: capitalize;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .empty-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .empty-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient background glow mesh circles -->
+  <div class="aurora-blur aurora-primary" style="top: 10%; left: -10%;"></div>
+  <div class="aurora-blur aurora-secondary" style="top: 25%; right: -15%;"></div>
+
+  <!-- Header -->
+  <header class="landing-header">
+    <div class="logo-container">
+      <a href="{% url 'index' %}" style="text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round" style="width: 100%; height: 100%; color: #2563EB;">
+            <path d="M12 2L2 22h20L12 2z" fill="rgba(37, 99, 235, 0.08)" stroke="#2563EB" />
+            <path d="M12 6l-6 10h12l-6-10z" fill="#2563EB" stroke="#2563EB" />
+            <circle cx="12" cy="13" r="2" fill="#FFFFFF" />
+            <path d="M12 15v4" stroke="#2563EB" />
+          </svg>
+        </div>
+        <div class="logo-text" style="color: var(--text-primary);">Resu<span>Metric</span></div>
+      </a>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <a href="{% url 'templates_gallery' %}" class="btn-build-now" style="background: transparent; color: var(--text-primary); border: 1px solid var(--border-color); box-shadow: none; text-decoration: none;">
+        Templates
+      </a>
+      <a href="{% url 'builder_new' %}" class="btn-build-now">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+        </svg>
+        Create New
+      </a>
+    </div>
+  </header>
+
+  <!-- Dashboard Content -->
+  <main class="dashboard-section">
+    <div class="dashboard-header-row">
+      <div>
+        <h1 class="dashboard-title">Saved Resumes</h1>
+        <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Manage and edit your saved resume blueprints.</p>
+      </div>
+      <a href="{% url 'builder_new' %}" class="btn-saas-primary" style="text-decoration: none; padding: 10px 20px;">
+        Create Resume
+      </a>
+    </div>
+
+    <div class="resumes-table-container">
+      {% if resumes %}
+        <table class="resumes-table">
+          <thead>
+            <tr>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Template</th>
+              <th>Last Updated</th>
+              <th style="text-align: right; width: 150px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for resume in resumes %}
+              <tr>
+                <td style="font-weight: 700;">{{ resume.full_name }}</td>
+                <td style="color: var(--text-muted);">{{ resume.email }}</td>
+                <td><span class="template-badge">{{ resume.selected_template }}</span></td>
+                <td style="color: var(--text-muted);">{{ resume.updated_at|date:"M d, Y H:i" }}</td>
+                <td style="text-align: right;">
+                  <div class="action-btn-group" style="justify-content: flex-end;">
+                    <!-- View Button -->
+                    <a href="{% url 'resume_view' resume.resume_id %}" class="action-btn btn-view" title="View Template Layout">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </a>
+                    <!-- Edit Button -->
+                    <a href="{% url 'resume_edit' resume.resume_id %}" class="action-btn btn-edit" title="Edit Resume">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                    </a>
+                    <!-- Delete Button -->
+                    <a href="{% url 'resume_delete' resume.resume_id %}" class="action-btn btn-delete" title="Delete Resume" onclick="return confirm('Are you sure you want to delete this resume?')">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <div class="empty-state">
+          <div style="width: 48px; height: 48px; margin: 0 auto 16px; color: var(--text-muted);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+          </div>
+          <h2 class="empty-title">No Saved Resumes</h2>
+          <p class="empty-desc">You haven't saved any resumes yet. Start building one now!</p>
+          <a href="{% url 'builder_new' %}" class="btn-saas-primary" style="text-decoration: none; padding: 10px 24px;">
+            Get Started
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="logo-container" style="margin-bottom: 16px;">
+          <div class="logo-icon" style="width: 24px; height: 24px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" style="width: 100%; height: 100%; color: #2563EB;">
+              <path d="M12 2L2 22h20L12 2z" fill="rgba(37, 99, 235, 0.08)" stroke="#2563EB" />
+              <path d="M12 6l-6 10h12l-6-10z" fill="#2563EB" stroke="#2563EB" />
+              <circle cx="12" cy="13" r="2" fill="#FFFFFF" />
+              <path d="M12 15v4" stroke="#2563EB" />
+            </svg>
+          </div>
+          <div class="logo-text" style="font-size:18px;">Resu<span>Metric</span></div>
+        </div>
+        <p class="footer-brand-text">Premium builder optimized for applicant parsing systems and engineering candidates.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2024 ResuMetric AI. Engineered for Excellence.</div>
+      <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+        <a href="#">Support</a>
+        <a href="#">Security</a>
+        <div style="color: var(--text-muted); font-size: 11px; margin-left: 12px; text-align: left; line-height: 1.4;">
+          Designed and Developed by<br>
+          <span style="padding-left: 12px; color: var(--text-primary); font-weight: 700;">Prajwal Chougala</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResuMetric | Choose Your Blueprint</title>
+  <meta name="description"
+    content="Select from our premium, ATS-optimized resume blueprints designed for engineering candidates.">
+  <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+</head>
+
+<body>
+
+  <!-- Ambient background glow mesh circles -->
+  <div class="aurora-blur aurora-primary" style="top: 10%; left: -10%;"></div>
+  <div class="aurora-blur aurora-secondary" style="top: 25%; right: -15%;"></div>
+  <div class="aurora-blur aurora-accent" style="bottom: 10%; left: 20%;"></div>
+
+  <!-- Header -->
+  <header class="landing-header">
+    <div class="logo-container">
+      <a href="{% url 'index' %}" style="text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round" style="width: 100%; height: 100%; color: #2563EB;">
+            <path d="M12 2L2 22h20L12 2z" fill="rgba(37, 99, 235, 0.08)" stroke="#2563EB" />
+            <path d="M12 6l-6 10h12l-6-10z" fill="#2563EB" stroke="#2563EB" />
+            <circle cx="12" cy="13" r="2" fill="#FFFFFF" />
+            <path d="M12 15v4" stroke="#2563EB" />
+          </svg>
+        </div>
+        <div class="logo-text" style="color: var(--text-primary);">Resu<span>Metric</span></div>
+      </a>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <a href="{% url 'resume_list' %}" class="btn-build-now" style="background: transparent; color: var(--text-primary); border: 1px solid var(--border-color); box-shadow: none; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+        My Resumes
+      </a>
+      <a href="{% url 'builder_new' %}" class="btn-build-now">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+        </svg>
+        Build Now
+      </a>
+    </div>
+  </header>
+
+  <!-- Template Showcase Section -->
+  <section class="templates-section" id="templates" style="padding: 140px 24px 80px; min-height: 80vh;">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto 56px;">
+      <h2
+        style="font-size: 36px; font-weight: 800; letter-spacing: -0.75px; color: var(--text-primary); margin-bottom: 12px;">
+        Choose Your Blueprint</h2>
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">Re-engineered blueprints tailored
+        specifically to clear ATS bots and wow engineering directors.</p>
+    </div>
+
+    <div class="templates-grid">
+      <!-- Professional Card -->
+      <div class="premium-template-card">
+        <div class="template-card-preview">
+          <img src="{% static 'assets/template_prof.png' %}" alt="Professional Template preview"
+            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
+        </div>
+        <div class="template-card-info">
+          <div class="template-card-header">
+            <h3 class="template-card-name">Professional</h3>
+            <div class="template-card-badges">
+              <span class="badge-saas recommended">RECOMMENDED</span>
+              <span class="badge-saas ats">ATS 98%</span>
+            </div>
+          </div>
+
+          <p class="template-card-desc">Ideal for corporate positions and corporate roles. Recommended for developers
+            with 3+ years experience.</p>
+          <a href="{% url 'builder_new' %}?template=professional" class="btn-template-use">Use Template</a>
+        </div>
+      </div>
+
+      <!-- Modern Card -->
+      <div class="premium-template-card">
+        <div class="template-card-preview">
+          <img src="{% static 'assets/template_mod.png' %}" alt="Modern Template preview"
+            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
+        </div>
+        <div class="template-card-info">
+          <div class="template-card-header">
+            <h3 class="template-card-name">Modern</h3>
+            <div class="template-card-badges">
+              <span class="badge-saas popular">POPULAR</span>
+              <span class="badge-saas ats">ATS 94%</span>
+            </div>
+          </div>
+
+          <p class="template-card-desc">High contrast dual-column dark styling. Best for fast-growing startups and
+            product engineers.</p>
+          <a href="{% url 'builder_new' %}?template=modern" class="btn-template-use">Use Template</a>
+        </div>
+      </div>
+
+      <!-- Student Card -->
+      <div class="premium-template-card">
+        <div class="template-card-preview">
+          <img src="{% static 'assets/template_stud.png' %}" alt="Student Template preview"
+            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
+        </div>
+        <div class="template-card-info">
+          <div class="template-card-header">
+            <h3 class="template-card-name">Student</h3>
+            <div class="template-card-badges">
+              <span class="badge-saas recommended"
+                style="background-color: var(--accent-glow); color: var(--accent); border-color: rgba(6,182,212,0.2);">EDU
+                FOCUS</span>
+              <span class="badge-saas ats">ATS 96%</span>
+            </div>
+          </div>
+
+          <p class="template-card-desc">Academic details and projects placed first. Perfect for new college graduates
+            and freshers.</p>
+          <a href="{% url 'builder_new' %}?template=student" class="btn-template-use">Use Template</a>
+        </div>
+      </div>
+
+      <!-- Minimal Card -->
+      <div class="premium-template-card">
+        <div class="template-card-preview">
+          <img src="{% static 'assets/template_min.png' %}" alt="Minimal Template preview"
+            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
+        </div>
+        <div class="template-card-info">
+          <div class="template-card-header">
+            <h3 class="template-card-name">Minimal</h3>
+            <div class="template-card-badges">
+              <span class="badge-saas ats">ATS 99%</span>
+            </div>
+          </div>
+
+          <p class="template-card-desc">Clean spacing, classic serif formatting. Ideal for designers, writers, and
+            executive leaders.</p>
+          <a href="{% url 'builder_new' %}?template=minimal" class="btn-template-use">Use Template</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="logo-container" style="margin-bottom: 16px;">
+          <div class="logo-icon" style="width: 24px; height: 24px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" style="width: 100%; height: 100%; color: #2563EB;">
+              <path d="M12 2L2 22h20L12 2z" fill="rgba(37, 99, 235, 0.08)" stroke="#2563EB" />
+              <path d="M12 6l-6 10h12l-6-10z" fill="#2563EB" stroke="#2563EB" />
+              <circle cx="12" cy="13" r="2" fill="#FFFFFF" />
+              <path d="M12 15v4" stroke="#2563EB" />
+            </svg>
+          </div>
+          <div class="logo-text" style="font-size:18px;">Resu<span>Metric</span></div>
+        </div>
+        <p class="footer-brand-text">Premium builder optimized for applicant parsing systems and engineering candidates.
+        </p>
+      </div>
+
+      <div class="footer-saas-links-container" style="display: flex; gap: 80px;">
+        <div class="footer-links-col">
+          <div class="footer-col-title">Product</div>
+          <div class="footer-col-links">
+            <a href="{% url 'builder_new' %}?tab=editor">Editor Panel</a>
+            <a href="{% url 'builder_new' %}?tab=layout">Blueprints</a>
+            <a href="{% url 'builder_new' %}?tab=styles">Styling</a>
+          </div>
+        </div>
+        <div class="footer-links-col">
+          <div class="footer-col-title">Legal</div>
+          <div class="footer-col-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">API Docs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2024 ResuMetric AI. Engineered for Excellence.</div>
+      <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+        <a href="#">Support</a>
+        <a href="#">Security</a>
+        <div style="color: var(--text-muted); font-size: 11px; margin-left: 12px; text-align: left; line-height: 1.4;">
+          Designed and Developed by<br>
+          <span style="padding-left: 12px; color: var(--text-primary); font-weight: 700;">Prajwal Chougala</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

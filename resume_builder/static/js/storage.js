@@ -89,6 +89,10 @@ const DEFAULT_RESUME_DATA = {
  * @returns {Object} Resume data object
  */
 function loadResumeData() {
+  if (window.initialResumeData) {
+    console.log('Loading resume data from Django backend injection');
+    return window.initialResumeData;
+  }
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {

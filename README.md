@@ -1,154 +1,68 @@
-# 📄 ResuMetric - Smart Resume Builder
+# ResuMetric - Premium SaaS Resume Builder
 
-A modern and responsive Resume Builder that helps users create professional and ATS-friendly resumes with ease. ResuMetric provides multiple resume templates, real-time preview, ATS score analysis, auto-save functionality, and PDF export capabilities.
+ResuMetric is a full-stack Django and MySQL application for building ATS-optimized, visually stunning resumes. It features multiple design templates (Professional, Modern, Student, Minimal), interactive customizers (margins, colors, fonts, photo toggles), a live rendering page, real-time completion status checking, an ATS analysis simulator, and instant PDF vector downloads.
 
----
+## Features
 
-### 🚀 Features
-
-#### ✨ Multiple Resume Templates
-- Professional Template
-- Modern Template
-- Student Template
-- Minimal Template
-
-#### 👀 Live Resume Preview
-- Real-time updates while editing
-- Instant template switching
-- Professional A4 resume rendering
-
-#### 📊 ATS Score Analysis
-- Resume quality scoring
-- Missing section detection
-- Improvement suggestions
-
-#### 💾 Auto Save
-- Local Storage integration
-- Automatically saves user progress
-- Restores data after refresh
-
-#### 🎨 Customization
-- Theme color selection
-- Font customization
-- Layout density options
-- Dark/Light mode support
-
-#### 📄 PDF Export
-- High-quality PDF generation
-- Print-friendly layouts
-- A4 optimized formatting
-
-#### 📱 Responsive Design
-- Desktop split-screen builder
-- Tablet optimized layout
-- Mobile-friendly experience
+- **Django Backend & URL Routing**: Implements fully functional views for editing, viewing, and deleting resumes.
+- **Relational MySQL Schema & Django ORM**: Saves resume data structure securely across relational MySQL database tables.
+- **Live Preview Sync**: Form details and styles synchronize in real-time with the A4 layout.
+- **AJAX Database Saving**: Clicking "Save Resume" in the header collects the form state and updates the MySQL database atomically with CSRF validation.
+- **Interactive Listings View**: Dashboard panel to view, edit, and delete saved resumes.
+- **Django Admin Panel**: Ready-to-use admin workspace with nested inline structures to inspect all resume parts in one view.
+- **ATS Analyzer Widget**: Simulated keyword scan scoring and suggestions list.
 
 ---
 
-### 🏗️ Project Structure
+## Technical Stack
 
-```text
-Resume_Builder/
-│
-├── index.html
-├── templates.html
-├── builder.html
-│
-├── css/
-│   ├── variables.css
-│   ├── landing.css
-│   ├── builder.css
-│   └── templates.css
-│
-├── js/
-│   ├── storage.js
-│   ├── templates.js
-│   ├── builder.js
-│   └── landing.js
-│
-├── assets/
-│   ├── images/
-│   ├── icons/
-│   └── templates/
-│
-└── README.md
+- **Backend**: Python, Django 5.2+
+- **Database**: MySQL 8.0+
+- **Frontend**: HTML5, Vanilla CSS3, JavaScript (ES6)
+- **PDF Generation**: html2pdf.js
+
+---
+
+## Prerequisites
+
+1. **Python 3.12+**
+2. **MySQL Server** running locally on port `3306`
+
+---
+
+## Setup & Running Instructions
+
+### 1. Database Configuration
+Ensure a MySQL database named `resumetric_db` exists on `localhost:3306`. (Settings default: user: `root`, password: `cbs123`).
+
+### 2. Install Dependencies
+Run the command below in the repository root directory to install required packages:
+```bash
+pip install -r requirements.txt
 ```
 
----
+### 3. Run Migrations
+Run the migrations to create all database tables in MySQL:
+```bash
+python manage.py migrate
+```
 
-### 🛠️ Technologies Used
-
-#### Frontend
-- HTML5
-- CSS3
-- JavaScript (ES6)
-
-#### Libraries
-- html2pdf.js
-- Local Storage API
-
-#### Design
-- Glassmorphism UI
-- Responsive Design
-- Modern SaaS-inspired Interface
-
----
-
-### 📋 Modules
-
-#### Landing Page
-- Hero Section
-- Statistics Section
-- Features Section
-- Template Showcase
-- Call To Action
-
-#### Template Gallery
-- Template Selection
-- Template Preview
-- ATS Compatibility Display
-
-#### Resume Builder
-- Personal Information
-- Career Objective
-- Education
-- Skills
-- Projects
-- Certifications
-- Languages
-- Achievements
-
-#### ATS Analytics
-- Resume Score
-- Improvement Suggestions
-- Completion Percentage
-
-#### Export Module
-- PDF Download
-- Print-Friendly Resume
+### 4. Run the Development Server
+Start the server:
+```bash
+python manage.py runserver
+```
+Open your browser and navigate to:
+- App Dashboard: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+- Saved Resumes List: [http://127.0.0.1:8000/resumes/](http://127.0.0.1:8000/resumes/)
+- Django Admin Workspace: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+  - **Username**: `admin`
+  - **Password**: `admin123`
 
 ---
 
-### 🎯 Key Highlights
-
-- Real-Time Resume Generation
-- ATS-Friendly Resume Templates
-- Interactive Resume Editor
-- Auto Save Functionality
-- PDF Export Support
-- Mobile Responsive Design
-- Customizable Resume Styles
-
----
-
-### 🎓 Academic Purpose
-
-This project was developed as an MCA Mini Project to demonstrate concepts such as responsive web development, DOM manipulation, local storage management, dynamic template rendering, ATS analysis, and client-side PDF generation.
-
----
-
-
-
-### ❤️ Made With
-
-HTML • CSS • JavaScript
+## Running Tests
+Run the unit test suite verifying the database save endpoint and views:
+```bash
+python manage.py test
+```

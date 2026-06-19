@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +8,8 @@
   <title>ResuMetric | Premium SaaS Resume Builder</title>
   <meta name="description"
     content="Design ATS-optimized resumes that stand out. Real-time preview, instant PDF downloads, and active keyword scores.">
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
 </head>
 
 <body>
@@ -32,7 +33,7 @@
       </div>
       <div class="logo-text">Resu<span>Metric</span></div>
     </div>
-    <a href="builder.html" class="btn-build-now">
+    <a href="{% url 'builder_new' %}" class="btn-build-now">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 20h9" />
@@ -56,7 +57,7 @@
       </p>
 
       <div class="hero-actions">
-        <a href="builder.html?tab=editor" class="btn-saas-primary">Create Resume</a>
+        <a href="{% url 'builder_new' %}?tab=editor" class="btn-saas-primary">Create Resume</a>
         <a href="#templates" class="btn-saas-secondary">Explore Templates</a>
       </div>
     </div>
@@ -177,7 +178,7 @@
       <!-- Professional Card -->
       <div class="premium-template-card">
         <div class="template-card-preview">
-          <img src="assets/template_prof.png" alt="Professional Template preview"
+          <img src="{% static 'assets/template_prof.png' %}" alt="Professional Template preview"
             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
         </div>
         <div class="template-card-info">
@@ -191,14 +192,14 @@
 
           <p class="template-card-desc">Ideal for corporate positions and corporate roles. Recommended for developers
             with 3+ years experience.</p>
-          <a href="builder.html?template=professional" class="btn-template-use">Use Template</a>
+          <a href="{% url 'builder_new' %}?template=professional" class="btn-template-use">Use Template</a>
         </div>
       </div>
 
       <!-- Modern Card -->
       <div class="premium-template-card">
         <div class="template-card-preview">
-          <img src="assets/template_mod.png" alt="Modern Template preview"
+          <img src="{% static 'assets/template_mod.png' %}" alt="Modern Template preview"
             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
         </div>
         <div class="template-card-info">
@@ -212,14 +213,14 @@
 
           <p class="template-card-desc">High contrast dual-column dark styling. Best for fast-growing startups and
             product engineers.</p>
-          <a href="builder.html?template=modern" class="btn-template-use">Use Template</a>
+          <a href="{% url 'builder_new' %}?template=modern" class="btn-template-use">Use Template</a>
         </div>
       </div>
 
       <!-- Student Card -->
       <div class="premium-template-card">
         <div class="template-card-preview">
-          <img src="assets/template_stud.png" alt="Student Template preview"
+          <img src="{% static 'assets/template_stud.png' %}" alt="Student Template preview"
             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
         </div>
         <div class="template-card-info">
@@ -235,14 +236,14 @@
 
           <p class="template-card-desc">Academic details and projects placed first. Perfect for new college graduates
             and freshers.</p>
-          <a href="builder.html?template=student" class="btn-template-use">Use Template</a>
+          <a href="{% url 'builder_new' %}?template=student" class="btn-template-use">Use Template</a>
         </div>
       </div>
 
       <!-- Minimal Card -->
       <div class="premium-template-card">
         <div class="template-card-preview">
-          <img src="assets/template_min.png" alt="Minimal Template preview"
+          <img src="{% static 'assets/template_min.png' %}" alt="Minimal Template preview"
             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22133%22 viewBox=%220 0 100 133%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
         </div>
         <div class="template-card-info">
@@ -255,7 +256,7 @@
 
           <p class="template-card-desc">Clean spacing, classic serif formatting. Ideal for designers, writers, and
             executive leaders.</p>
-          <a href="builder.html?template=minimal" class="btn-template-use">Use Template</a>
+          <a href="{% url 'builder_new' %}?template=minimal" class="btn-template-use">Use Template</a>
         </div>
       </div>
     </div>
@@ -477,9 +478,9 @@
         <div class="footer-links-col">
           <div class="footer-col-title">Product</div>
           <div class="footer-col-links">
-            <a href="builder.html?tab=editor">Editor Panel</a>
-            <a href="builder.html?tab=layout">Blueprints</a>
-            <a href="builder.html?tab=styles">Styling</a>
+            <a href="{% url 'builder_new' %}?tab=editor">Editor Panel</a>
+            <a href="{% url 'builder_new' %}?tab=layout">Blueprints</a>
+            <a href="{% url 'builder_new' %}?tab=styles">Styling</a>
           </div>
         </div>
         <div class="footer-links-col">
@@ -506,7 +507,7 @@
     </div>
   </footer>
 
-  <script src="js/landing.js"></script>
+  <script src="{% static 'js/landing.js' %}"></script>
 </body>
 
 </html>

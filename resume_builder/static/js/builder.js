@@ -913,4 +913,127 @@ document.addEventListener('DOMContentLoaded', () => {
   updateSectionIndicators();
   updateAtsPanel();
 
+  // ==========================================
+  // AJAX SAVE HANDLER
+  // ==========================================
+  const btnSaveResume = document.getElementById('btn-save-resume');
+  if (btnSaveResume) {
+    btnSaveResume.addEventListener('click', () => {
+      const originalText = btnSaveResume.innerHTML;
+      btnSaveResume.innerHTML = `
+        <svg style="animation: spin 1s linear infinite; width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 6px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" style="opacity: 0.25;"></circle>
+          <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" style="opacity: 0.75;"></path>
+        </svg>
+        Saving...
+      `;
+      btnSaveResume.disabled = true;
+
+      fetch('/resume/save/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': window.csrfToken || ''
+        },
+        body: JSON.stringify(resumeData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        btnSaveResume.innerHTML = originalText;
+        btnSaveResume.disabled = false;
+        if (data.status === 'success') {
+          // Store resume ID in the current resume data so subsequent saves update the same record!
+          resumeData.resumeId = data.resume_id;
+          if (window.initialResumeData) {
+            window.initialResumeData.resumeId = data.resume_id;
+          } else {
+            window.initialResumeData = { resumeId: data.resume_id };
+          }
+          
+          showToast('Resume saved successfully!', 'success');
+          // If we are on a new resume path, let's redirect to edit URL to preserve URL state
+          if (window.location.pathname.indexOf('/builder/') !== -1) {
+            window.history.replaceState({}, '', `/resume/edit/${data.resume_id}/`);
+          }
+        } else {
+          showToast('Failed to save: ' + (data.message || 'Unknown error'), 'error');
+        }
+      })
+      .catch(err => {
+        console.error('Save error:', err);
+        btnSaveResume.innerHTML = originalText;
+        btnSaveResume.disabled = false;
+        showToast('Network error while saving.', 'error');
+      });
+    });
+  }
+
+  // Toast Helper
+  function showToast(message, type = 'success') {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toast-container';
+      container.style.position = 'fixed';
+      container.style.bottom = '24px';
+      container.style.right = '24px';
+      container.style.zIndex = '9999';
+      container.style.display = 'flex';
+      container.style.flexDirection = 'column';
+      container.style.gap = '10px';
+      document.body.appendChild(container);
+    }
+
+    if (!document.getElementById('toast-styles')) {
+      const style = document.createElement('style');
+      style.id = 'toast-styles';
+      style.textContent = `
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    const toast = document.createElement('div');
+    toast.style.background = 'rgba(15, 23, 42, 0.95)';
+    toast.style.backdropFilter = 'blur(12px)';
+    toast.style.border = type === 'success' ? '1px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(239, 68, 68, 0.4)';
+    toast.style.color = type === 'success' ? '#10B981' : '#EF4444';
+    toast.style.padding = '12px 20px';
+    toast.style.borderRadius = '8px';
+    toast.style.fontSize = '13px';
+    toast.style.fontWeight = '600';
+    toast.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+    toast.style.display = 'flex';
+    toast.style.alignItems = 'center';
+    toast.style.gap = '8px';
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(20px)';
+    toast.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+
+    const icon = type === 'success' 
+      ? `<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`
+      : `<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>`;
+
+    toast.innerHTML = `${icon} <span>${message}</span>`;
+    container.appendChild(toast);
+
+    // Fade In
+    setTimeout(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+    }, 50);
+
+    // Fade Out and Remove
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(-20px)';
+      setTimeout(() => {
+        toast.remove();
+      }, 300);
+    }, 3000);
+  }
+
 });
