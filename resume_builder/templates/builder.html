@@ -9,6 +9,31 @@
   <link rel="stylesheet" href="{% static 'css/variables.css' %}">
   <link rel="stylesheet" href="{% static 'css/builder.css' %}">
   <link rel="stylesheet" href="{% static 'css/templates.css' %}">
+  <style>
+    /* Inline overrides to bypass aggressive browser cache of builder.css */
+    .saas-preview-pane {
+      display: block !important;
+      padding-bottom: 100px !important;
+      overflow-y: auto !important;
+    }
+    @media (min-width: 1024px) {
+      .saas-preview-pane {
+        display: block !important;
+      }
+    }
+    .saas-paper-container {
+      aspect-ratio: unset !important;
+      height: auto !important;
+      min-height: 1074px !important;
+      overflow: visible !important;
+      margin: 0 auto !important;
+    }
+    @media (max-width: 767px) {
+      .saas-paper-container {
+        min-height: 565px !important;
+      }
+    }
+  </style>
 </head>
 <body class="builder-body">
 
@@ -55,10 +80,6 @@
         <button class="sidebar-btn active" data-tab="editor">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
           <span>Editor</span>
-        </button>
-        <button class="sidebar-btn" data-tab="layout">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-          <span>Templates</span>
         </button>
         <button class="sidebar-btn" data-tab="styles">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
@@ -290,61 +311,41 @@
         <div class="blueprint-grid">
           <!-- Professional blueprint -->
           <div class="blueprint-card" data-template-id="professional">
+            <div class="blueprint-header">
+              <button class="btn-select-blueprint">Use This Template</button>
+            </div>
             <div class="blueprint-preview-box">
               <img src="{% static 'assets/template_prof.png' %}" alt="Professional Template" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
-            </div>
-            <div class="blueprint-info">
-              <div class="blueprint-title-row">
-                <span class="blueprint-name">Professional</span>
-                <span class="blueprint-badge" style="background-color: var(--primary-glow); color: var(--primary); border: 1px solid rgba(37,99,235,0.2);">ATS 98%</span>
-              </div>
-              <p class="blueprint-desc">Classic executive layout. Recommended for senior engineering and developer roles.</p>
-              <button class="btn-select-blueprint">Use Template</button>
             </div>
           </div>
 
           <!-- Modern blueprint -->
           <div class="blueprint-card" data-template-id="modern">
+            <div class="blueprint-header">
+              <button class="btn-select-blueprint">Use This Template</button>
+            </div>
             <div class="blueprint-preview-box">
               <img src="{% static 'assets/template_mod.png' %}" alt="Modern Template" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%230F172A%22/></svg>'">
-            </div>
-            <div class="blueprint-info">
-              <div class="blueprint-title-row">
-                <span class="blueprint-name">Modern</span>
-                <span class="blueprint-badge" style="background-color: var(--secondary-glow); color: var(--secondary); border: 1px solid rgba(124,58,237,0.2);">ATS 94%</span>
-              </div>
-              <p class="blueprint-desc">Bold split-column slate design. Recommended for startup teams and product creators.</p>
-              <button class="btn-select-blueprint">Use Template</button>
             </div>
           </div>
 
           <!-- Student blueprint -->
           <div class="blueprint-card" data-template-id="student">
+            <div class="blueprint-header">
+              <button class="btn-select-blueprint">Use This Template</button>
+            </div>
             <div class="blueprint-preview-box">
               <img src="{% static 'assets/template_stud.png' %}" alt="Student Template" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23FFFFFF%22/></svg>'">
-            </div>
-            <div class="blueprint-info">
-              <div class="blueprint-title-row">
-                <span class="blueprint-name">Student</span>
-                <span class="blueprint-badge" style="background-color: var(--accent-glow); color: var(--accent); border: 1px solid rgba(6,182,212,0.2);">ATS 96%</span>
-              </div>
-              <p class="blueprint-desc">Education-first centered outline. Recommended for graduates, students, and interns.</p>
-              <button class="btn-select-blueprint">Use Template</button>
             </div>
           </div>
 
           <!-- Minimal blueprint -->
           <div class="blueprint-card" data-template-id="minimal">
+            <div class="blueprint-header">
+              <button class="btn-select-blueprint">Use This Template</button>
+            </div>
             <div class="blueprint-preview-box">
               <img src="{% static 'assets/template_min.png' %}" alt="Minimal Template" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231E293B%22/></svg>'">
-            </div>
-            <div class="blueprint-info">
-              <div class="blueprint-title-row">
-                <span class="blueprint-name">Minimal</span>
-                <span class="blueprint-badge" style="background-color: rgba(255,255,255,0.06); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.1);">ATS 99%</span>
-              </div>
-              <p class="blueprint-desc">Ultra-clean editorial serif formatting. Recommended for writers, designers, and managers.</p>
-              <button class="btn-select-blueprint">Use Template</button>
             </div>
           </div>
         </div>
@@ -516,10 +517,6 @@
     <button class="nav-tab-item active" data-tab="editor">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
       <span>Editor</span>
-    </button>
-    <button class="nav-tab-item" data-tab="layout">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-      <span>Templates</span>
     </button>
     <button class="nav-tab-item" data-tab="styles">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>

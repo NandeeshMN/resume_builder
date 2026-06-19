@@ -682,16 +682,14 @@ textarea.saas-control {
   display: none; /* Hidden on mobile default */
   background-color: #090d16;
   border-left: 1px solid var(--border-color);
-  padding: 24px;
+  padding: 24px 24px 80px 24px;
   overflow-y: auto;
   height: 100%;
-  justify-content: center;
-  align-items: flex-start;
 }
 
 @media (min-width: 1024px) {
   .saas-preview-pane {
-    display: flex;
+    display: block;
   }
 }
 
@@ -709,14 +707,24 @@ textarea.saas-control {
 .saas-paper-container {
   width: 100%;
   max-width: 760px;
-  aspect-ratio: 1 / 1.414; /* Precise A4 aspect ratio */
+  margin: 0 auto;
   background: #FFFFFF;
   box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 1px rgba(255,255,255,0.06);
   border-radius: 4px;
-  overflow: hidden;
   transform-origin: top center;
   transition: transform 0.2s ease;
   position: relative;
+  
+  /* Dynamic height to prevent cutoff and scroll naturally */
+  height: auto;
+  min-height: 1074px; /* A4 height at 760px width */
+  overflow: visible;
+}
+
+@media (max-width: 767px) {
+  .saas-paper-container {
+    min-height: 565px; /* A4 height at ~400px width */
+  }
 }
 
 /* Mobile responsive tabs layout overrides */
@@ -726,11 +734,11 @@ textarea.saas-control {
   }
   
   .saas-workspace.preview-active .saas-preview-pane {
-    display: flex;
+    display: block;
     background-color: #020617;
     height: 100%;
     overflow-y: auto;
-    padding: 16px;
+    padding: 16px 16px 80px 16px;
   }
 }
 
@@ -843,6 +851,7 @@ textarea.saas-control {
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
 }
 
 .blueprint-card:hover {
@@ -856,6 +865,15 @@ textarea.saas-control {
   box-shadow: 0 0 0 2px var(--primary-glow), 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
+.blueprint-header {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.01);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .blueprint-preview-box {
   aspect-ratio: 3 / 4;
   background-color: #0d121f;
@@ -864,7 +882,6 @@ textarea.saas-control {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid var(--border-color);
 }
 
 .blueprint-preview-box img {

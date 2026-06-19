@@ -750,8 +750,9 @@ document.addEventListener('DOMContentLoaded', () => {
         card.classList.remove('selected');
       }
 
-      const selectBtn = card.querySelector('.btn-select-blueprint');
-      selectBtn.onclick = () => {
+      // Clicking anywhere on the card applies the template
+      card.onclick = () => {
+        console.log("Applying template ID:", templateId);
         resumeData.templateId = templateId;
         saveAndUpdate();
         renderLayoutTab();

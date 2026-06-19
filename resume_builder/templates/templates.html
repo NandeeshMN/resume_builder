@@ -131,7 +131,7 @@
       .modal-content-grid {
         grid-template-columns: 1.2fr 1fr;
         max-height: 80vh;
-        overflow-y: visible;
+        overflow: hidden;
       }
     }
     
@@ -148,6 +148,10 @@
       .modal-preview-side {
         border-bottom: none;
         border-right: 1px solid var(--border-color);
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      .modal-details-side {
         max-height: 80vh;
         overflow-y: auto;
       }
