@@ -26,7 +26,6 @@ ResuMetric is a full-stack Django and MySQL application for building ATS-optimiz
 ## Prerequisites
 
 1. **Python 3.12+**
-2. **MySQL Server** running locally on port `3306`
 
 ---
 
